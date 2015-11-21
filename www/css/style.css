@@ -1,0 +1,80 @@
+html, body, #root {
+	height: 100%;
+	margin: 0;
+	overflow-y: hidden;
+}
+
+* {
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+#app {
+	height: 100%;
+}
+
+/* Login */
+#login {
+	flex: 1;
+	background: url(../images/dummy.png) center / cover;
+}
+
+#login .inner {
+	flex: 0 0 80%;
+	margin: 0 auto;
+}
+
+/* Top bar */
+#topbar {
+	flex: 0 0 10%;
+}
+
+#topbar .hamburger {
+	flex: 1;
+}
+
+#topbar .logo {
+	flex: 1;
+	text-align: right;
+}
+
+/* Dashboard */
+#dashboard {
+	flex: 1;
+	background: white;
+}
+
+#dashboard .total-miles {
+	flex: 1;
+	text-align: center;
+}
+
+#dashboard .drives {
+	flex: 1;
+	text-align: center;
+}
+
+#dashboard .start-driving {
+	flex: 1;
+	text-align: center;
+}
+
+/* Driving */
+#driving {
+	flex: 1;
+	background: white;
+}
+
+#driving .map {
+	flex: 3;
+	background: gray;
+}
+
+#driving .distance {
+	flex: 1;
+	text-align: center;
+}
+
+#driving .finish {
+	flex: 1;
+	text-align: center;
+}

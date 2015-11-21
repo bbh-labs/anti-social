@@ -1,0 +1,16 @@
+{
+  "name": "anti-social",
+  "version": "0.0.1",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jacky Boen",
+  "license": "GPL-2.0",
+  "dependencies": {
+    "flux": "^2.1.1",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3"
+  }
+}
