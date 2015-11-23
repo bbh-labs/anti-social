@@ -1,15 +1,76 @@
 html, body, #root {
 	height: 100%;
 	margin: 0;
-	overflow-y: hidden;
 }
 
 * {
 	font-family: Helvetica, Arial, sans-serif;
 }
 
+.text-left {
+	text-align: left;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.text-right {
+	text-align: right;
+}
+
 #app {
+	position: relative;
 	height: 100%;
+}
+
+/* Top bar */
+#topbar {
+	flex: 0 0 10%;
+	background: #4f4a68;
+}
+
+#topbar .hamburger {
+	flex: 1;
+	margin: 16px;
+}
+
+#topbar .hamburger .image {
+	cursor: pointer;
+}
+
+#topbar .logo {
+	flex: 1;
+	margin: 16px;
+	text-align: right;
+}
+
+/* Side bar */
+#sidebar {
+	position: absolute;
+	width: 80%;
+	height: 100%;
+	z-index: 2;
+	left: -80%;
+	background: #111111;
+	transition: left .4s;
+}
+
+#sidebar.active {
+	left: 0%;
+}
+
+#sidebar .list .inner {
+	margin: 16px;
+}
+
+#sidebar .item {
+	margin-top: 16px;
+}
+
+#sidebar .item .text {
+	color: #f1f1f1;
+	margin-left: 16px;
 }
 
 /* Login */
@@ -21,20 +82,6 @@ html, body, #root {
 #login .inner {
 	flex: 0 0 80%;
 	margin: 0 auto;
-}
-
-/* Top bar */
-#topbar {
-	flex: 0 0 10%;
-}
-
-#topbar .hamburger {
-	flex: 1;
-}
-
-#topbar .logo {
-	flex: 1;
-	text-align: right;
 }
 
 /* Dashboard */
@@ -61,6 +108,7 @@ html, body, #root {
 /* Driving */
 #driving {
 	flex: 1;
+	position: relative;
 	background: white;
 }
 
@@ -77,4 +125,31 @@ html, body, #root {
 #driving .finish {
 	flex: 1;
 	text-align: center;
+}
+
+#driving .failed {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	background: rgba(0, 0, 0, 0.8);
+}
+
+#driving .failed .inner {
+	margin: 16px;
+}
+
+#driving .failed .message {
+	background: white;
+	padding: 16px;
+}
+
+#driving .failed .button {
+	display: block;
+	width: 100%;
+}
+
+/* Rewards */
+#rewards {
+	flex: 1;
 }

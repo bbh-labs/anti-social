@@ -17,6 +17,10 @@
 	flex-direction: column;
 }
 
+.even {
+	flex: 1;
+}
+
 .align-start {
 	-webkit-align-items: flex-start;
 	-ms-align-items: flex-start;
