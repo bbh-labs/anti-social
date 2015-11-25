@@ -12,6 +12,7 @@ if (Number.prototype.toDegrees === undefined) {
     Number.prototype.toDegrees = function() { return this * 180 / Math.PI; };
 }
 
+// Calculates distance between two geographical coordinates in metres
 function haversine(lat1, lat2, lon1, lon2) {
 	var R = 6371000; // metres
 	var t1 = lat1.toRadians();
@@ -220,8 +221,8 @@ App.Dashboard.TotalMiles = React.createClass({
 		)
 	},
 	totalMiles: function() {
-		var meters = localStorage.getItem('meters');
-		var miles = meters ? meters * 0.000621371 : 0;
+		var meters = parseInt(localStorage.getItem('traveledDistance'));
+		var miles = !isNaN(meters) ? meters * 0.000621371 : 0;
 		return miles;
 	},
 });
@@ -231,7 +232,7 @@ App.Dashboard.Drives = React.createClass({
 		return (
 			<div className='drives flex column justify-center'>
 				<div>
-					<h3>DRIVE</h3>
+					<h3>DRIVES</h3>
 					<h3>{this.driveCount()}</h3>
 				</div>
 				<div>
@@ -247,14 +248,14 @@ App.Dashboard.Drives = React.createClass({
 		)
 	},
 	driveCount: function() {
-		return this.successCount() + this.failedCount();
+		return parseInt(this.successCount()) + parseInt(this.failedCount());
 	},
 	successCount: function() {
-		var count = localStorage.getItem('successCount');
+		var count = parseInt(localStorage.getItem('successCount'));
 		return count ? count : 0;
 	},
 	failedCount: function() {
-		var count = localStorage.getItem('failedCount');
+		var count = parseInt(localStorage.getItem('failedCount'));
 		return count ? count : 0;
 	},
 });
@@ -279,7 +280,7 @@ App.Driving = React.createClass({
 				{ this.state.failed ? <App.Driving.Failed /> : null }
 				<App.Driving.Map updateDistance={this.updateDistance} />
 				<App.Driving.Distance distance={this.state.distance} />
-				<App.Driving.Finish />
+				<App.Driving.Finish distance={this.state.distance} />
 			</div>
 		)
 	},
@@ -290,7 +291,7 @@ App.Driving = React.createClass({
 		this.listenerID = dispatcher.register(function(payload) {
 			switch (payload.type) {
 			case 'resume':
-				this.setState({ failed: true });
+				this.failed();
 				break;
 			}
 		});
@@ -301,6 +302,16 @@ App.Driving = React.createClass({
 	updateDistance: function(a, b) {
 		var d = haversine(a.lat, b.lat, a.lng, b.lng);
 		this.setState({ distance: d });
+	},
+	failed: function() {
+		var traveledDistance = parseInt(localStorage.getItem('traveledDistance'));
+		traveledDistance = !isNaN(traveledDistance) ? traveledDistance + this.state.distance : this.state.distance;
+		localStorage.setItem('traveledDistance', traveledDistance);
+
+		var failedCount = parseInt(localStorage.getItem('failedCount'));
+		failedCount = !isNaN(failedCount) ? failedCount + 1 : 1;
+		localStorage.setItem('failedCount', failedCount);
+		this.setState({ failed: true });
 	},
 });
 
@@ -339,6 +350,10 @@ App.Driving.Map = React.createClass({
 		this.map.setZoom(19);
 	},
 	onLocationReceived: function(position) {
+		if (typeof(plugin) == 'undefined') {
+			return;
+		}
+
 		var coords = position.coords;
 		var latlng = new plugin.google.maps.LatLng(coords.latitude, coords.longitude);
 		if (this.marker) {
@@ -371,7 +386,7 @@ App.Driving.Distance = React.createClass({
 		)
 	},
 	totalDistance: function() {
-		return this.props.distance * 0.000621371;
+		return (this.props.distance * 0.000621371).toFixed(2);
 	},
 });
 
@@ -379,11 +394,18 @@ App.Driving.Finish = React.createClass({
 	render: function() {
 		return (
 			<div className='finish flex column align-center justify-center'>
-				<button onClick={this.finish}>FINISH</button>
+				<button onClick={this.finishDriving}>FINISH</button>
 			</div>
 		)
 	},
-	finish: function() {
+	finishDriving: function() {
+		var traveledDistance = parseInt(localStorage.getItem('traveledDistance'));
+		traveledDistance = !isNaN(traveledDistance) ? traveledDistance + this.props.distance : this.props.distance;
+		localStorage.setItem('traveledDistance', traveledDistance);
+
+		var successCount = parseInt(localStorage.getItem('successCount'));
+		successCount = !isNaN(successCount) ? successCount + 1 : 1;
+		localStorage.setItem('successCount', successCount);
 		dispatcher.dispatch({ type: 'goto', page: 'dashboard' });
 	},
 });
