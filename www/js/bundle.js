@@ -119,8 +119,11 @@
 				}
 			}).bind(this));
 
-			document.addEventListener('pause', this.onPause, false);
-			document.addEventListener('resume', this.onResume, false);
+			if (device.platform == 'iPhone') {
+				document.addEventListener('active', this.onResume, false);
+			} else {
+				document.addEventListener('resume', this.onResume, false);
+			}
 		},
 		componentWillUnmount: function () {
 			dispatcher.unregister(this.listenerID);
