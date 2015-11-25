@@ -460,6 +460,7 @@ App.Driving.Map = React.createClass({
 				}
 			});
 
+			this.map.clear();
 			this.map.addEventListener(plugin.google.maps.event.MAP_READY, this.onMapReady);
 
 			if (this.props.showSidebar) {
