@@ -119,14 +119,17 @@
 				}
 			}).bind(this));
 
-			if (device.platform == 'iPhone') {
+			document.addEventListener('deviceready', this.onDeviceReady, false);
+		},
+		componentWillUnmount: function () {
+			dispatcher.unregister(this.listenerID);
+		},
+		onDeviceReady: function () {
+			if (device.platform == 'iOS') {
 				document.addEventListener('active', this.onResume, false);
 			} else {
 				document.addEventListener('resume', this.onResume, false);
 			}
-		},
-		componentWillUnmount: function () {
-			dispatcher.unregister(this.listenerID);
 		},
 		onPause: function () {
 			dispatcher.dispatch({ type: 'pause' });
