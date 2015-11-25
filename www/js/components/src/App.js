@@ -102,7 +102,7 @@ App.Topbar.Hamburger = React.createClass({
 	render: function() {
 		return (
 			<div className='hamburger'>
-				<img className='image' src='images/dummy.png' onClick={this.props.showSidebar} />
+				<img className='image' src='images/hamburger.png' onClick={this.props.showSidebar} />
 			</div>
 		)
 	},
@@ -112,7 +112,7 @@ App.Topbar.Logo = React.createClass({
 	render: function() {
 		return (
 			<div className='logo'>
-				<img className='image' src='images/dummy.png' />
+				<img className='image' src='images/ntuc_logo_white.png' />
 			</div>
 		)
 	},
@@ -133,10 +133,10 @@ App.Sidebar.List = React.createClass({
 		return (
 			<div className='list flex'>
 				<div className='flex even inner column'>
-					<App.Sidebar.Item image='images/dummy.png' onClick={this.gotoDrive}>Drive</App.Sidebar.Item>
-					<App.Sidebar.Item image='images/dummy.png' onClick={this.gotoRewards}>Rewards</App.Sidebar.Item>
-					<App.Sidebar.Item image='images/dummy.png' onClick={this.gotoSettings}>Settings</App.Sidebar.Item>
-					<App.Sidebar.Item image='images/dummy.png' onClick={this.logout}>Log out</App.Sidebar.Item>
+					<App.Sidebar.Item image='images/icon_drive.png' onClick={this.gotoDrive}>Drive</App.Sidebar.Item>
+					<App.Sidebar.Item image='images/icon_rewards.png' onClick={this.gotoRewards}>Rewards</App.Sidebar.Item>
+					<App.Sidebar.Item image='images/icon_setting.png' onClick={this.gotoSettings}>Settings</App.Sidebar.Item>
+					<App.Sidebar.Item image='images/icon_logout.png' onClick={this.logout}>Log out</App.Sidebar.Item>
 				</div>
 			</div>
 		)
@@ -173,13 +173,17 @@ App.Sidebar.Item = React.createClass({
 App.Login = React.createClass({
 	render: function() {
 		return (
-			<div id='login' className='flex'>
-				<div className='flex inner column justify-center'>
+			<div id='login' className='flex align-center justify-center' >
+				<div className='flex inner column '>
 					<h1>ANTI-SOCIAL DRIVE</h1>
 					<h3>Don&#39;t use your phone while driving and earn rewards.</h3>
 					<input id='nric' type='text' placeholder='NRIC' />
 					<input id='policy-number' type='text' placeholder='Driver Policy Number' />
 					<button onClick={this.gotoDashboard}>SIGN IN</button>
+						<div className="login-bottom">
+							<p>Terms and conditions</p>
+							<img src="images/ntuc_logo_orange.png" alt="ntuc-logo"/>
+						</div>
 				</div>
 			</div>
 		)
@@ -194,7 +198,9 @@ App.Dashboard = React.createClass({
 		return (
 			<div id='dashboard' className='flex column align-center' >
 				<App.Dashboard.TotalMiles />
+				<hr/>
 				<App.Dashboard.Drives />
+				<hr/>
 				<App.Dashboard.StartDriving />
 			</div>
 		)
@@ -205,11 +211,12 @@ App.Dashboard.TotalMiles = React.createClass({
 	render: function() {
 		return (
 			<div className='total-miles flex column justify-center'>
-				<img src='images/dummy.png' />
+				<img src='images/landing_miles_icon.png' />
 				<h4>Total Miles</h4>
 				<h1>{this.totalMiles().toFixed(2)}</h1>
 				<h5>GET YOUR REWARDS NOW</h5>
 			</div>
+
 		)
 	},
 	totalMiles: function() {
@@ -236,6 +243,7 @@ App.Dashboard.Drives = React.createClass({
 					<h3>{this.failedCount()}</h3>
 				</div>
 			</div>
+
 		)
 	},
 	driveCount: function() {

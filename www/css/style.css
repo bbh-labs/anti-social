@@ -4,7 +4,7 @@ html, body, #root {
 }
 
 * {
-	font-family: Helvetica, Arial, sans-serif;
+	font-family: "AvantGarde CE", Arial, sans-serif; src: url('../font/ITC Avant Garde Gothic/IC-Avant-Garde-Gothic-LT-Demi.ttf');
 }
 
 .text-left {
@@ -24,10 +24,22 @@ html, body, #root {
 	height: 100%;
 }
 
+
+hr{
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+    width: 100%;
+    border-color: #f7f7f7;
+}
+
 /* Top bar */
 #topbar {
 	flex: 0 0 10%;
-	background: #4f4a68;
+	background: #4f4b67;
 }
 
 #topbar .hamburger {
@@ -37,12 +49,17 @@ html, body, #root {
 
 #topbar .hamburger .image {
 	cursor: pointer;
+	width: 35px;
 }
 
 #topbar .logo {
 	flex: 1;
-	margin: 16px;
+	margin: 10px;
 	text-align: right;
+}
+
+#topbar .logo img{
+	width: 90px;
 }
 
 /* Side bar */
@@ -52,7 +69,7 @@ html, body, #root {
 	height: 100%;
 	z-index: 2;
 	left: -80%;
-	background: #111111;
+	background: #3b3b3b;
 	transition: left .4s;
 }
 
@@ -68,20 +85,89 @@ html, body, #root {
 	margin-top: 16px;
 }
 
+#sidebar .item img{
+	height: 40px;
+	width: 40px;
+}
+
 #sidebar .item .text {
 	color: #f1f1f1;
-	margin-left: 16px;
+	margin: auto 16px;
+	font-size: 14pt;
 }
 
 /* Login */
 #login {
 	flex: 1;
-	background: url(../images/dummy.png) center / cover;
+	background: url(../images/login_bg.jpg) center / cover;
 }
 
 #login .inner {
 	flex: 0 0 80%;
 	margin: 0 auto;
+}
+
+#login h1{
+	text-align: center;
+	color: white;
+	font-size: 26pt;
+	font-weight: 700;
+	margin-top: 20px;
+	margin-bottom: 0px;
+}
+
+#login h3{
+	text-align: center;
+	color: white;
+	font-weight: 100;
+	font-size: 12pt;
+	margin-bottom: 120px;
+	margin-top: 10px;
+}
+
+#login button{
+	padding: 5px 60px;
+	margin: 15px auto;
+	border-radius: 60px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #fff;
+	height: 40px;
+	font-size: 10pt;
+	background: none;
+	color: #fff;
+	margin-bottom: 40px;
+}
+
+.login-bottom {
+	margin-top: 30px;
+}
+
+.login-bottom p{
+	color: white;
+	font-size: 8pt;
+	text-align: left;
+	display: inline-block;
+}
+
+.login-bottom img{
+	width: 80px;
+	height: 35px;
+	float: right;
+}
+
+input{
+	height: 25px;
+	margin:10px;
+	background-color: rgba(255,255,255,.8);
+	border: none;
+
+}
+
+input[placeholder]{
+	color: #000;
+	font-size: 10pt;
+	padding: 5px 10px;
 }
 
 /* Dashboard */
@@ -91,18 +177,60 @@ html, body, #root {
 }
 
 #dashboard .total-miles {
-	flex: 1;
+	/*flex: 1;*/
 	text-align: center;
+
 }
 
+#dashboard .total-miles img{
+	width: 120px;
+	margin: 20px auto 0px auto;
+}
+
+#dashboard h4{
+	font-size: 12pt;
+	font-weight: 100;
+	margin: 15px;
+}
+
+#dashboard h1{
+	font-size: 32pt;
+	margin: 0px;
+}
+
+#dashboard h5{
+	font-size: 8pt;
+	color: #f7941e;
+	font-weight: 300;
+	margin: 10px;
+}
+
+
+
 #dashboard .drives {
-	flex: 1;
+	/*flex: 1;*/
 	text-align: center;
+	display: -webkit-box;
+	height: 40px;
+	padding: 15px;
+}
+
+#dashboard .drives h3{
+	font-size: 10pt;
+	margin: 5px 15px;
 }
 
 #dashboard .start-driving {
 	flex: 1;
 	text-align: center;
+}
+
+#dashboard .start-driving button{
+	background-color: #f7941e;
+	padding: 15px 60px;
+	border:none;
+	color: #fff;
+	font-size: 14px;
 }
 
 /* Driving */
@@ -122,9 +250,31 @@ html, body, #root {
 	text-align: center;
 }
 
+#driving .distance h3{
+	font-size: 10pt;
+	font-weight: 100;
+}
+
+#driving .distance h1{
+	font-size: 32pt;
+	margin: 0px;
+}
+
 #driving .finish {
 	flex: 1;
 	text-align: center;
+}
+
+#driving .finish button{
+	border:8px;
+	border-style: solid;
+	border-color: #f7941e;
+	border-radius: 50%;
+	width: 100px;
+	height: 100px; 
+	background-color: #fff;
+	font-size: 12pt;
+	font-weight: 700;
 }
 
 #driving .failed {
@@ -153,3 +303,33 @@ html, body, #root {
 #rewards {
 	flex: 1;
 }
+#rewards h1{
+	color: #6d6d6d;
+	text-transform: uppercase;
+	font-size: 18pt;
+}
+
+#rewards p{
+	text-align: center;
+	color: #6b6b6b;
+	font-size: 10pt;
+	margin: auto 20px;
+}
+
+#rewards img{
+	width: 300px;
+	margin: 15px auto;
+}
+
+#rewards button {
+	background-color: #f7941e;
+	color: #fff;
+	border:none;
+	padding: 5px 20px;
+}
+
+.footer p{
+	text-align: left !important;
+	color: #313131 !important;
+}
+

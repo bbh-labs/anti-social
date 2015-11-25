@@ -44,6 +44,8 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
 	var Flux = __webpack_require__(159);
@@ -79,7 +81,7 @@
 	var App = React.createClass({
 		displayName: 'App',
 
-		render: function () {
+		render: function render() {
 			var page = this.state.page;
 			var elem;
 
@@ -106,10 +108,10 @@
 				)
 			);
 		},
-		getInitialState: function () {
+		getInitialState: function getInitialState() {
 			return { page: 'login', sidebar: false };
 		},
-		componentDidMount: function () {
+		componentDidMount: function componentDidMount() {
 			this.listenerID = dispatcher.register((function (payload) {
 				switch (payload.type) {
 					case 'goto':
@@ -121,20 +123,20 @@
 			document.addEventListener('pause', this.onPause, false);
 			document.addEventListener('resume', this.onResume, false);
 		},
-		componentWillUnmount: function () {
+		componentWillUnmount: function componentWillUnmount() {
 			dispatcher.unregister(this.listenerID);
 		},
-		onPause: function () {
+		onPause: function onPause() {
 			dispatcher.dispatch({ type: 'pause' });
 		},
-		onResume: function () {
+		onResume: function onResume() {
 			dispatcher.dispatch({ type: 'resume' });
 		},
-		showSidebar: function (event) {
+		showSidebar: function showSidebar(event) {
 			event.stopPropagation();
 			this.setState({ sidebar: true });
 		},
-		hideSidebar: function () {
+		hideSidebar: function hideSidebar() {
 			this.setState({ sidebar: false });
 		}
 	});
@@ -142,7 +144,7 @@
 	App.Topbar = React.createClass({
 		displayName: 'Topbar',
 
-		render: function () {
+		render: function render() {
 			return React.createElement(
 				'div',
 				{ id: 'topbar', className: 'flex row align-center' },
@@ -155,11 +157,11 @@
 	App.Topbar.Hamburger = React.createClass({
 		displayName: 'Hamburger',
 
-		render: function () {
+		render: function render() {
 			return React.createElement(
 				'div',
 				{ className: 'hamburger' },
-				React.createElement('img', { className: 'image', src: 'images/dummy.png', onClick: this.props.showSidebar })
+				React.createElement('img', { className: 'image', src: 'images/hamburger.png', onClick: this.props.showSidebar })
 			);
 		}
 	});
@@ -167,11 +169,11 @@
 	App.Topbar.Logo = React.createClass({
 		displayName: 'Logo',
 
-		render: function () {
+		render: function render() {
 			return React.createElement(
 				'div',
 				{ className: 'logo' },
-				React.createElement('img', { className: 'image', src: 'images/dummy.png' })
+				React.createElement('img', { className: 'image', src: 'images/ntuc_logo_white.png' })
 			);
 		}
 	});
@@ -179,7 +181,7 @@
 	App.Sidebar = React.createClass({
 		displayName: 'Sidebar',
 
-		render: function () {
+		render: function render() {
 			return React.createElement(
 				'div',
 				{ id: 'sidebar', className: cx('flex column', this.props.sidebar ? 'active' : '') },
@@ -191,7 +193,7 @@
 	App.Sidebar.List = React.createClass({
 		displayName: 'List',
 
-		render: function () {
+		render: function render() {
 			return React.createElement(
 				'div',
 				{ className: 'list flex' },
@@ -200,40 +202,40 @@
 					{ className: 'flex even inner column' },
 					React.createElement(
 						App.Sidebar.Item,
-						{ image: 'images/dummy.png', onClick: this.gotoDrive },
+						{ image: 'images/icon_drive.png', onClick: this.gotoDrive },
 						'Drive'
 					),
 					React.createElement(
 						App.Sidebar.Item,
-						{ image: 'images/dummy.png', onClick: this.gotoRewards },
+						{ image: 'images/icon_rewards.png', onClick: this.gotoRewards },
 						'Rewards'
 					),
 					React.createElement(
 						App.Sidebar.Item,
-						{ image: 'images/dummy.png', onClick: this.gotoSettings },
+						{ image: 'images/icon_setting.png', onClick: this.gotoSettings },
 						'Settings'
 					),
 					React.createElement(
 						App.Sidebar.Item,
-						{ image: 'images/dummy.png', onClick: this.logout },
+						{ image: 'images/icon_logout.png', onClick: this.logout },
 						'Log out'
 					)
 				)
 			);
 		},
-		gotoDrive: function () {
+		gotoDrive: function gotoDrive() {
 			this.props.hideSidebar();
 			dispatcher.dispatch({ type: 'goto', page: 'driving' });
 		},
-		gotoRewards: function () {
+		gotoRewards: function gotoRewards() {
 			this.props.hideSidebar();
 			dispatcher.dispatch({ type: 'goto', page: 'rewards' });
 		},
-		gotoSettings: function () {
+		gotoSettings: function gotoSettings() {
 			this.props.hideSidebar();
 			dispatcher.dispatch({ type: 'goto', page: 'dashboard' });
 		},
-		logout: function () {
+		logout: function logout() {
 			this.props.hideSidebar();
 			dispatcher.dispatch({ type: 'goto', page: 'login' });
 		}
@@ -242,7 +244,7 @@
 	App.Sidebar.Item = React.createClass({
 		displayName: 'Item',
 
-		render: function () {
+		render: function render() {
 			return React.createElement(
 				'div',
 				{ className: 'item flex row', onClick: this.props.onClick },
@@ -259,13 +261,13 @@
 	App.Login = React.createClass({
 		displayName: 'Login',
 
-		render: function () {
+		render: function render() {
 			return React.createElement(
 				'div',
-				{ id: 'login', className: 'flex' },
+				{ id: 'login', className: 'flex align-center justify-center' },
 				React.createElement(
 					'div',
-					{ className: 'flex inner column justify-center' },
+					{ className: 'flex inner column ' },
 					React.createElement(
 						'h1',
 						null,
@@ -282,11 +284,21 @@
 						'button',
 						{ onClick: this.gotoDashboard },
 						'SIGN IN'
+					),
+					React.createElement(
+						'div',
+						{ className: 'login-bottom' },
+						React.createElement(
+							'p',
+							null,
+							'Terms and conditions'
+						),
+						React.createElement('img', { src: 'images/ntuc_logo_orange.png', alt: 'ntuc-logo' })
 					)
 				)
 			);
 		},
-		gotoDashboard: function () {
+		gotoDashboard: function gotoDashboard() {
 			dispatcher.dispatch({ type: 'goto', page: 'dashboard' });
 		}
 	});
@@ -294,12 +306,14 @@
 	App.Dashboard = React.createClass({
 		displayName: 'Dashboard',
 
-		render: function () {
+		render: function render() {
 			return React.createElement(
 				'div',
 				{ id: 'dashboard', className: 'flex column align-center' },
 				React.createElement(App.Dashboard.TotalMiles, null),
+				React.createElement('hr', null),
 				React.createElement(App.Dashboard.Drives, null),
+				React.createElement('hr', null),
 				React.createElement(App.Dashboard.StartDriving, null)
 			);
 		}
@@ -308,11 +322,11 @@
 	App.Dashboard.TotalMiles = React.createClass({
 		displayName: 'TotalMiles',
 
-		render: function () {
+		render: function render() {
 			return React.createElement(
 				'div',
 				{ className: 'total-miles flex column justify-center' },
-				React.createElement('img', { src: 'images/dummy.png' }),
+				React.createElement('img', { src: 'images/landing_miles_icon.png' }),
 				React.createElement(
 					'h4',
 					null,
@@ -330,7 +344,7 @@
 				)
 			);
 		},
-		totalMiles: function () {
+		totalMiles: function totalMiles() {
 			var meters = localStorage.getItem('meters');
 			var miles = meters ? meters * 0.000621371 : 0;
 			return miles;
@@ -340,7 +354,7 @@
 	App.Dashboard.Drives = React.createClass({
 		displayName: 'Drives',
 
-		render: function () {
+		render: function render() {
 			return React.createElement(
 				'div',
 				{ className: 'drives flex column justify-center' },
@@ -388,14 +402,14 @@
 				)
 			);
 		},
-		driveCount: function () {
+		driveCount: function driveCount() {
 			return this.successCount() + this.failedCount();
 		},
-		successCount: function () {
+		successCount: function successCount() {
 			var count = localStorage.getItem('successCount');
 			return count ? count : 0;
 		},
-		failedCount: function () {
+		failedCount: function failedCount() {
 			var count = localStorage.getItem('failedCount');
 			return count ? count : 0;
 		}
@@ -404,7 +418,7 @@
 	App.Dashboard.StartDriving = React.createClass({
 		displayName: 'StartDriving',
 
-		render: function () {
+		render: function render() {
 			return React.createElement(
 				'div',
 				{ className: 'start-driving flex column justify-center' },
@@ -415,7 +429,7 @@
 				)
 			);
 		},
-		startDriving: function () {
+		startDriving: function startDriving() {
 			dispatcher.dispatch({ type: 'goto', page: 'driving' });
 		}
 	});
@@ -423,7 +437,7 @@
 	App.Driving = React.createClass({
 		displayName: 'Driving',
 
-		render: function () {
+		render: function render() {
 			return React.createElement(
 				'div',
 				{ id: 'driving', className: 'flex column' },
@@ -433,10 +447,10 @@
 				React.createElement(App.Driving.Finish, null)
 			);
 		},
-		getInitialState: function () {
+		getInitialState: function getInitialState() {
 			return { distance: 0, failed: false };
 		},
-		componentDidMount: function () {
+		componentDidMount: function componentDidMount() {
 			this.listenerID = dispatcher.register(function (payload) {
 				switch (payload.type) {
 					case 'resume':
@@ -445,10 +459,10 @@
 				}
 			});
 		},
-		componentWillUnmount: function () {
+		componentWillUnmount: function componentWillUnmount() {
 			dispatcher.unregister(this.listenerID);
 		},
-		updateDistance: function (a, b) {
+		updateDistance: function updateDistance(a, b) {
 			var d = haversine(a.lat, b.lat, a.lng, b.lng);
 			this.setState({ distance: d });
 		}
@@ -457,10 +471,10 @@
 	App.Driving.Map = React.createClass({
 		displayName: 'Map',
 
-		render: function () {
+		render: function render() {
 			return React.createElement('div', { id: 'map', className: 'map' });
 		},
-		componentDidMount: function () {
+		componentDidMount: function componentDidMount() {
 			if (typeof plugin != 'undefined' && typeof this.map == 'undefined') {
 				this.map = plugin.google.maps.Map.getMap(document.getElementById('map'), {
 					controls: {
@@ -484,13 +498,13 @@
 				maximumAge: 10000
 			});
 		},
-		componentWillUnmount: function () {
+		componentWillUnmount: function componentWillUnmount() {
 			navigator.geolocation.clearWatch(this.watchID);
 		},
-		onMapReady: function () {
+		onMapReady: function onMapReady() {
 			this.map.setZoom(19);
 		},
-		onLocationReceived: function (position) {
+		onLocationReceived: function onLocationReceived(position) {
 			var coords = position.coords;
 			var latlng = new plugin.google.maps.LatLng(coords.latitude, coords.longitude);
 			if (this.marker) {
@@ -507,7 +521,7 @@
 				}).bind(this));
 			}
 		},
-		onLocationError: function (error) {
+		onLocationError: function onLocationError(error) {
 			alert(error.message);
 			dispatcher.dispatch({ type: 'goto', page: 'dashboard' });
 		}
@@ -516,7 +530,7 @@
 	App.Driving.Distance = React.createClass({
 		displayName: 'Distance',
 
-		render: function () {
+		render: function render() {
 			return React.createElement(
 				'div',
 				{ className: 'distance flex column align-center justify-center' },
@@ -532,7 +546,7 @@
 				)
 			);
 		},
-		totalDistance: function () {
+		totalDistance: function totalDistance() {
 			return this.props.distance * 0.000621371;
 		}
 	});
@@ -540,7 +554,7 @@
 	App.Driving.Finish = React.createClass({
 		displayName: 'Finish',
 
-		render: function () {
+		render: function render() {
 			return React.createElement(
 				'div',
 				{ className: 'finish flex column align-center justify-center' },
@@ -551,7 +565,7 @@
 				)
 			);
 		},
-		finish: function () {
+		finish: function finish() {
 			dispatcher.dispatch({ type: 'goto', page: 'dashboard' });
 		}
 	});
@@ -559,7 +573,7 @@
 	App.Driving.Failed = React.createClass({
 		displayName: 'Failed',
 
-		render: function () {
+		render: function render() {
 			return React.createElement(
 				'div',
 				{ className: 'failed flex column align-center justify-center' },
@@ -579,7 +593,7 @@
 				)
 			);
 		},
-		startAgain: function () {
+		startAgain: function startAgain() {
 			dispatcher.dispatch({ type: 'goto', page: 'dashboard' });
 		}
 	});
@@ -587,7 +601,7 @@
 	App.Rewards = React.createClass({
 		displayName: 'Rewards',
 
-		render: function () {
+		render: function render() {
 			return React.createElement(
 				'div',
 				{ id: 'rewards', className: 'flex column' },
@@ -613,7 +627,7 @@
 	App.Rewards.List = React.createClass({
 		displayName: 'List',
 
-		render: function () {
+		render: function render() {
 			return React.createElement(
 				'div',
 				{ className: 'list flex column' },
@@ -622,7 +636,7 @@
 				})
 			);
 		},
-		getInitialState: function () {
+		getInitialState: function getInitialState() {
 			return {
 				items: [{
 					distance: 2000,
@@ -638,7 +652,7 @@
 	App.Rewards.Item = React.createClass({
 		displayName: 'Item',
 
-		render: function () {
+		render: function render() {
 			var item = this.props.item;
 			return React.createElement(
 				'div',
