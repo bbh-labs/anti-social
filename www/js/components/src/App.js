@@ -352,6 +352,10 @@ App.Driving.Map = React.createClass({
 	},
 	componentWillUnmount: function() {
 		navigator.geolocation.clearWatch(this.watchID);
+		if (typeof(this.map) != 'undefined') {
+			this.map.remove();
+			delete this.map;
+		}
 	},
 	onMapReady: function() {
 		this.map.setZoom(19);
