@@ -55,7 +55,7 @@ var App = React.createClass({
 			React.createElement(App.Sidebar, { sidebar: this.state.sidebar, hideSidebar: this.hideSidebar }),
 			React.createElement(
 				'div',
-				{ className: 'flex column even', onClick: this.hideSidebar },
+				{ className: 'flex column one', onClick: this.hideSidebar },
 				page == 'login' ? null : React.createElement(App.Topbar, { showSidebar: this.showSidebar }),
 				elem
 			)
@@ -152,7 +152,7 @@ App.Sidebar.List = React.createClass({
 			{ className: 'list flex' },
 			React.createElement(
 				'div',
-				{ className: 'flex even inner column' },
+				{ className: 'flex one inner column' },
 				React.createElement(
 					App.Sidebar.Item,
 					{ image: 'images/icon_drive.png', onClick: this.gotoDrive },
@@ -637,13 +637,13 @@ App.Rewards.Item = React.createClass({
 				{ className: 'footer flex row' },
 				React.createElement(
 					'p',
-					{ className: 'distance even' },
+					{ className: 'distance one' },
 					item.distance,
 					' KM'
 				),
 				React.createElement(
 					'div',
-					{ className: 'flex align-center justify-end even text-right' },
+					{ className: 'flex align-center justify-end one text-right' },
 					React.createElement(
 						'button',
 						{ className: 'button' },

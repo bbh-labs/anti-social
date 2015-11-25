@@ -48,7 +48,7 @@ var App = React.createClass({
 		return (
 			<div id='app' className='flex column'>
 				<App.Sidebar sidebar={this.state.sidebar} hideSidebar={this.hideSidebar} />
-				<div className='flex column even' onClick={this.hideSidebar}>
+				<div className='flex column one' onClick={this.hideSidebar}>
 					{ page == 'login' ? null : <App.Topbar showSidebar={this.showSidebar} /> }
 					{ elem }
 				</div>
@@ -133,7 +133,7 @@ App.Sidebar.List = React.createClass({
 	render: function() {
 		return (
 			<div className='list flex'>
-				<div className='flex even inner column'>
+				<div className='flex one inner column'>
 					<App.Sidebar.Item image='images/icon_drive.png' onClick={this.gotoDrive}>Drive</App.Sidebar.Item>
 					<App.Sidebar.Item image='images/icon_rewards.png' onClick={this.gotoRewards}>Rewards</App.Sidebar.Item>
 					<App.Sidebar.Item image='images/icon_setting.png' onClick={this.gotoSettings}>Settings</App.Sidebar.Item>
@@ -473,8 +473,8 @@ App.Rewards.Item = React.createClass({
 			<div className='item flex column'>
 				<img className='image' src={item.image} />
 				<div className='footer flex row'>
-					<p className='distance even'>{item.distance} KM</p>
-					<div className='flex align-center justify-end even text-right'>
+					<p className='distance one'>{item.distance} KM</p>
+					<div className='flex align-center justify-end one text-right'>
 						<button className='button'>EXCHANGE</button>
 					</div>
 				</div>
