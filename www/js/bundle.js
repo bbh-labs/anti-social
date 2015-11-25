@@ -90,7 +90,7 @@
 				case 'dashboard':
 					elem = React.createElement(App.Dashboard, null);break;
 				case 'driving':
-					elem = React.createElement(App.Driving, { showSidebar: this.showSidebar });break;
+					elem = React.createElement(App.Driving, { showSidebar: this.state.sidebar });break;
 				case 'rewards':
 					elem = React.createElement(App.Rewards, null);break;
 			}
@@ -491,7 +491,7 @@
 			return React.createElement('div', { id: 'map', className: 'map flex three' });
 		},
 		componentDidMount: function () {
-			if (typeof plugin != 'undefined' && typeof this.map == 'undefined') {
+			if (typeof plugin != 'undefined') {
 				this.map = plugin.google.maps.Map.getMap(document.getElementById('map'), {
 					controls: {
 						compass: true,
@@ -505,10 +505,13 @@
 						zoom: true
 					}
 				});
+
 				this.map.addEventListener(plugin.google.maps.event.MAP_READY, this.onMapReady);
 
 				if (this.props.showSidebar) {
 					this.map.setClickable(false);
+				} else {
+					this.map.setClickable(true);
 				}
 			}
 
@@ -519,10 +522,12 @@
 			});
 		},
 		componentDidUpdate: function () {
-			if (this.props.showSidebar) {
-				this.map.setClickable(false);
-			} else {
-				this.map.setClickable(true);
+			if (typeof this.map != 'undefined') {
+				if (this.props.showSidebar) {
+					this.map.setClickable(false);
+				} else {
+					this.map.setClickable(true);
+				}
 			}
 		},
 		componentWillUnmount: function () {
