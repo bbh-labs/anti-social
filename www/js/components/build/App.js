@@ -1,5 +1,3 @@
-'use strict';
-
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Flux = require('flux');
@@ -18,6 +16,7 @@ if (Number.prototype.toDegrees === undefined) {
 	};
 }
 
+// Calculates distance between two geographical coordinates in metres
 function haversine(lat1, lat2, lon1, lon2) {
 	var R = 6371000; // metres
 	var t1 = lat1.toRadians();
@@ -35,7 +34,7 @@ function haversine(lat1, lat2, lon1, lon2) {
 var App = React.createClass({
 	displayName: 'App',
 
-	render: function render() {
+	render: function () {
 		var page = this.state.page;
 		var elem;
 
@@ -62,10 +61,10 @@ var App = React.createClass({
 			)
 		);
 	},
-	getInitialState: function getInitialState() {
+	getInitialState: function () {
 		return { page: 'login', sidebar: false };
 	},
-	componentDidMount: function componentDidMount() {
+	componentDidMount: function () {
 		this.listenerID = dispatcher.register((function (payload) {
 			switch (payload.type) {
 				case 'goto':
@@ -77,20 +76,20 @@ var App = React.createClass({
 		document.addEventListener('pause', this.onPause, false);
 		document.addEventListener('resume', this.onResume, false);
 	},
-	componentWillUnmount: function componentWillUnmount() {
+	componentWillUnmount: function () {
 		dispatcher.unregister(this.listenerID);
 	},
-	onPause: function onPause() {
+	onPause: function () {
 		dispatcher.dispatch({ type: 'pause' });
 	},
-	onResume: function onResume() {
+	onResume: function () {
 		dispatcher.dispatch({ type: 'resume' });
 	},
-	showSidebar: function showSidebar(event) {
+	showSidebar: function (event) {
 		event.stopPropagation();
 		this.setState({ sidebar: true });
 	},
-	hideSidebar: function hideSidebar() {
+	hideSidebar: function () {
 		this.setState({ sidebar: false });
 	}
 });
@@ -98,7 +97,7 @@ var App = React.createClass({
 App.Topbar = React.createClass({
 	displayName: 'Topbar',
 
-	render: function render() {
+	render: function () {
 		return React.createElement(
 			'div',
 			{ id: 'topbar', className: 'flex row align-center' },
@@ -111,7 +110,7 @@ App.Topbar = React.createClass({
 App.Topbar.Hamburger = React.createClass({
 	displayName: 'Hamburger',
 
-	render: function render() {
+	render: function () {
 		return React.createElement(
 			'div',
 			{ className: 'hamburger' },
@@ -123,7 +122,7 @@ App.Topbar.Hamburger = React.createClass({
 App.Topbar.Logo = React.createClass({
 	displayName: 'Logo',
 
-	render: function render() {
+	render: function () {
 		return React.createElement(
 			'div',
 			{ className: 'logo' },
@@ -135,7 +134,7 @@ App.Topbar.Logo = React.createClass({
 App.Sidebar = React.createClass({
 	displayName: 'Sidebar',
 
-	render: function render() {
+	render: function () {
 		return React.createElement(
 			'div',
 			{ id: 'sidebar', className: cx('flex column', this.props.sidebar ? 'active' : '') },
@@ -147,7 +146,7 @@ App.Sidebar = React.createClass({
 App.Sidebar.List = React.createClass({
 	displayName: 'List',
 
-	render: function render() {
+	render: function () {
 		return React.createElement(
 			'div',
 			{ className: 'list flex' },
@@ -177,19 +176,19 @@ App.Sidebar.List = React.createClass({
 			)
 		);
 	},
-	gotoDrive: function gotoDrive() {
+	gotoDrive: function () {
 		this.props.hideSidebar();
 		dispatcher.dispatch({ type: 'goto', page: 'driving' });
 	},
-	gotoRewards: function gotoRewards() {
+	gotoRewards: function () {
 		this.props.hideSidebar();
 		dispatcher.dispatch({ type: 'goto', page: 'rewards' });
 	},
-	gotoSettings: function gotoSettings() {
+	gotoSettings: function () {
 		this.props.hideSidebar();
 		dispatcher.dispatch({ type: 'goto', page: 'dashboard' });
 	},
-	logout: function logout() {
+	logout: function () {
 		this.props.hideSidebar();
 		dispatcher.dispatch({ type: 'goto', page: 'login' });
 	}
@@ -198,7 +197,7 @@ App.Sidebar.List = React.createClass({
 App.Sidebar.Item = React.createClass({
 	displayName: 'Item',
 
-	render: function render() {
+	render: function () {
 		return React.createElement(
 			'div',
 			{ className: 'item flex row', onClick: this.props.onClick },
@@ -215,7 +214,7 @@ App.Sidebar.Item = React.createClass({
 App.Login = React.createClass({
 	displayName: 'Login',
 
-	render: function render() {
+	render: function () {
 		return React.createElement(
 			'div',
 			{ id: 'login', className: 'flex align-center justify-center' },
@@ -252,7 +251,7 @@ App.Login = React.createClass({
 			)
 		);
 	},
-	gotoDashboard: function gotoDashboard() {
+	gotoDashboard: function () {
 		dispatcher.dispatch({ type: 'goto', page: 'dashboard' });
 	}
 });
@@ -260,7 +259,7 @@ App.Login = React.createClass({
 App.Dashboard = React.createClass({
 	displayName: 'Dashboard',
 
-	render: function render() {
+	render: function () {
 		return React.createElement(
 			'div',
 			{ id: 'dashboard', className: 'flex column align-center' },
@@ -276,7 +275,7 @@ App.Dashboard = React.createClass({
 App.Dashboard.TotalMiles = React.createClass({
 	displayName: 'TotalMiles',
 
-	render: function render() {
+	render: function () {
 		return React.createElement(
 			'div',
 			{ className: 'total-miles flex column justify-center' },
@@ -298,9 +297,9 @@ App.Dashboard.TotalMiles = React.createClass({
 			)
 		);
 	},
-	totalMiles: function totalMiles() {
-		var meters = localStorage.getItem('meters');
-		var miles = meters ? meters * 0.000621371 : 0;
+	totalMiles: function () {
+		var meters = parseInt(localStorage.getItem('traveledDistance'));
+		var miles = !isNaN(meters) ? meters * 0.000621371 : 0;
 		return miles;
 	}
 });
@@ -308,7 +307,7 @@ App.Dashboard.TotalMiles = React.createClass({
 App.Dashboard.Drives = React.createClass({
 	displayName: 'Drives',
 
-	render: function render() {
+	render: function () {
 		return React.createElement(
 			'div',
 			{ className: 'drives flex column justify-center' },
@@ -318,7 +317,7 @@ App.Dashboard.Drives = React.createClass({
 				React.createElement(
 					'h3',
 					null,
-					'DRIVE'
+					'DRIVES'
 				),
 				React.createElement(
 					'h3',
@@ -356,15 +355,15 @@ App.Dashboard.Drives = React.createClass({
 			)
 		);
 	},
-	driveCount: function driveCount() {
-		return this.successCount() + this.failedCount();
+	driveCount: function () {
+		return parseInt(this.successCount()) + parseInt(this.failedCount());
 	},
-	successCount: function successCount() {
-		var count = localStorage.getItem('successCount');
+	successCount: function () {
+		var count = parseInt(localStorage.getItem('successCount'));
 		return count ? count : 0;
 	},
-	failedCount: function failedCount() {
-		var count = localStorage.getItem('failedCount');
+	failedCount: function () {
+		var count = parseInt(localStorage.getItem('failedCount'));
 		return count ? count : 0;
 	}
 });
@@ -372,7 +371,7 @@ App.Dashboard.Drives = React.createClass({
 App.Dashboard.StartDriving = React.createClass({
 	displayName: 'StartDriving',
 
-	render: function render() {
+	render: function () {
 		return React.createElement(
 			'div',
 			{ className: 'start-driving flex column justify-center' },
@@ -383,7 +382,7 @@ App.Dashboard.StartDriving = React.createClass({
 			)
 		);
 	},
-	startDriving: function startDriving() {
+	startDriving: function () {
 		dispatcher.dispatch({ type: 'goto', page: 'driving' });
 	}
 });
@@ -391,44 +390,54 @@ App.Dashboard.StartDriving = React.createClass({
 App.Driving = React.createClass({
 	displayName: 'Driving',
 
-	render: function render() {
+	render: function () {
 		return React.createElement(
 			'div',
 			{ id: 'driving', className: 'flex column' },
 			this.state.failed ? React.createElement(App.Driving.Failed, null) : null,
 			React.createElement(App.Driving.Map, { updateDistance: this.updateDistance }),
 			React.createElement(App.Driving.Distance, { distance: this.state.distance }),
-			React.createElement(App.Driving.Finish, null)
+			React.createElement(App.Driving.Finish, { distance: this.state.distance })
 		);
 	},
-	getInitialState: function getInitialState() {
+	getInitialState: function () {
 		return { distance: 0, failed: false };
 	},
-	componentDidMount: function componentDidMount() {
+	componentDidMount: function () {
 		this.listenerID = dispatcher.register(function (payload) {
 			switch (payload.type) {
 				case 'resume':
-					this.setState({ failed: true });
+					this.failed();
 					break;
 			}
 		});
 	},
-	componentWillUnmount: function componentWillUnmount() {
+	componentWillUnmount: function () {
 		dispatcher.unregister(this.listenerID);
 	},
-	updateDistance: function updateDistance(a, b) {
+	updateDistance: function (a, b) {
 		var d = haversine(a.lat, b.lat, a.lng, b.lng);
 		this.setState({ distance: d });
+	},
+	failed: function () {
+		var traveledDistance = parseInt(localStorage.getItem('traveledDistance'));
+		traveledDistance = !isNaN(traveledDistance) ? traveledDistance + this.state.distance : this.state.distance;
+		localStorage.setItem('traveledDistance', traveledDistance);
+
+		var failedCount = parseInt(localStorage.getItem('failedCount'));
+		failedCount = !isNaN(failedCount) ? failedCount + 1 : 1;
+		localStorage.setItem('failedCount', failedCount);
+		this.setState({ failed: true });
 	}
 });
 
 App.Driving.Map = React.createClass({
 	displayName: 'Map',
 
-	render: function render() {
+	render: function () {
 		return React.createElement('div', { id: 'map', className: 'map' });
 	},
-	componentDidMount: function componentDidMount() {
+	componentDidMount: function () {
 		if (typeof plugin != 'undefined' && typeof this.map == 'undefined') {
 			this.map = plugin.google.maps.Map.getMap(document.getElementById('map'), {
 				controls: {
@@ -452,13 +461,17 @@ App.Driving.Map = React.createClass({
 			maximumAge: 10000
 		});
 	},
-	componentWillUnmount: function componentWillUnmount() {
+	componentWillUnmount: function () {
 		navigator.geolocation.clearWatch(this.watchID);
 	},
-	onMapReady: function onMapReady() {
+	onMapReady: function () {
 		this.map.setZoom(19);
 	},
-	onLocationReceived: function onLocationReceived(position) {
+	onLocationReceived: function (position) {
+		if (typeof plugin == 'undefined') {
+			return;
+		}
+
 		var coords = position.coords;
 		var latlng = new plugin.google.maps.LatLng(coords.latitude, coords.longitude);
 		if (this.marker) {
@@ -475,7 +488,7 @@ App.Driving.Map = React.createClass({
 			}).bind(this));
 		}
 	},
-	onLocationError: function onLocationError(error) {
+	onLocationError: function (error) {
 		alert(error.message);
 		dispatcher.dispatch({ type: 'goto', page: 'dashboard' });
 	}
@@ -484,7 +497,7 @@ App.Driving.Map = React.createClass({
 App.Driving.Distance = React.createClass({
 	displayName: 'Distance',
 
-	render: function render() {
+	render: function () {
 		return React.createElement(
 			'div',
 			{ className: 'distance flex column align-center justify-center' },
@@ -500,26 +513,33 @@ App.Driving.Distance = React.createClass({
 			)
 		);
 	},
-	totalDistance: function totalDistance() {
-		return this.props.distance * 0.000621371;
+	totalDistance: function () {
+		return (this.props.distance * 0.000621371).toFixed(2);
 	}
 });
 
 App.Driving.Finish = React.createClass({
 	displayName: 'Finish',
 
-	render: function render() {
+	render: function () {
 		return React.createElement(
 			'div',
 			{ className: 'finish flex column align-center justify-center' },
 			React.createElement(
 				'button',
-				{ onClick: this.finish },
+				{ onClick: this.finishDriving },
 				'FINISH'
 			)
 		);
 	},
-	finish: function finish() {
+	finishDriving: function () {
+		var traveledDistance = parseInt(localStorage.getItem('traveledDistance'));
+		traveledDistance = !isNaN(traveledDistance) ? traveledDistance + this.props.distance : this.props.distance;
+		localStorage.setItem('traveledDistance', traveledDistance);
+
+		var successCount = parseInt(localStorage.getItem('successCount'));
+		successCount = !isNaN(successCount) ? successCount + 1 : 1;
+		localStorage.setItem('successCount', successCount);
 		dispatcher.dispatch({ type: 'goto', page: 'dashboard' });
 	}
 });
@@ -527,7 +547,7 @@ App.Driving.Finish = React.createClass({
 App.Driving.Failed = React.createClass({
 	displayName: 'Failed',
 
-	render: function render() {
+	render: function () {
 		return React.createElement(
 			'div',
 			{ className: 'failed flex column align-center justify-center' },
@@ -547,7 +567,7 @@ App.Driving.Failed = React.createClass({
 			)
 		);
 	},
-	startAgain: function startAgain() {
+	startAgain: function () {
 		dispatcher.dispatch({ type: 'goto', page: 'dashboard' });
 	}
 });
@@ -555,7 +575,7 @@ App.Driving.Failed = React.createClass({
 App.Rewards = React.createClass({
 	displayName: 'Rewards',
 
-	render: function render() {
+	render: function () {
 		return React.createElement(
 			'div',
 			{ id: 'rewards', className: 'flex column' },
@@ -581,7 +601,7 @@ App.Rewards = React.createClass({
 App.Rewards.List = React.createClass({
 	displayName: 'List',
 
-	render: function render() {
+	render: function () {
 		return React.createElement(
 			'div',
 			{ className: 'list flex column' },
@@ -590,7 +610,7 @@ App.Rewards.List = React.createClass({
 			})
 		);
 	},
-	getInitialState: function getInitialState() {
+	getInitialState: function () {
 		return {
 			items: [{
 				distance: 2000,
@@ -606,7 +626,7 @@ App.Rewards.List = React.createClass({
 App.Rewards.Item = React.createClass({
 	displayName: 'Item',
 
-	render: function render() {
+	render: function () {
 		var item = this.props.item;
 		return React.createElement(
 			'div',

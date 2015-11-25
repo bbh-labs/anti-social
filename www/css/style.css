@@ -25,7 +25,7 @@ html, body, #root {
 }
 
 
-hr{
+hr {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
     margin-left: auto;
@@ -58,7 +58,7 @@ hr{
 	text-align: right;
 }
 
-#topbar .logo img{
+#topbar .logo img {
 	width: 90px;
 }
 
@@ -85,7 +85,7 @@ hr{
 	margin-top: 16px;
 }
 
-#sidebar .item img{
+#sidebar .item img {
 	height: 40px;
 	width: 40px;
 }
@@ -107,7 +107,7 @@ hr{
 	margin: 0 auto;
 }
 
-#login h1{
+#login h1 {
 	text-align: center;
 	color: white;
 	font-size: 26pt;
@@ -116,7 +116,7 @@ hr{
 	margin-bottom: 0px;
 }
 
-#login h3{
+#login h3 {
 	text-align: center;
 	color: white;
 	font-weight: 100;
@@ -125,7 +125,7 @@ hr{
 	margin-top: 10px;
 }
 
-#login button{
+#login button {
 	padding: 5px 60px;
 	margin: 15px auto;
 	border-radius: 60px;
@@ -143,20 +143,20 @@ hr{
 	margin-top: 30px;
 }
 
-.login-bottom p{
+.login-bottom p {
 	color: white;
 	font-size: 8pt;
 	text-align: left;
 	display: inline-block;
 }
 
-.login-bottom img{
+.login-bottom img {
 	width: 80px;
 	height: 35px;
 	float: right;
 }
 
-input{
+input {
 	height: 25px;
 	margin:10px;
 	background-color: rgba(255,255,255,.8);
@@ -164,7 +164,7 @@ input{
 
 }
 
-input[placeholder]{
+input[placeholder] {
 	color: #000;
 	font-size: 10pt;
 	padding: 5px 10px;
@@ -182,30 +182,28 @@ input[placeholder]{
 
 }
 
-#dashboard .total-miles img{
+#dashboard .total-miles img {
 	width: 120px;
 	margin: 20px auto 0px auto;
 }
 
-#dashboard h4{
+#dashboard h4 {
 	font-size: 12pt;
 	font-weight: 100;
 	margin: 15px;
 }
 
-#dashboard h1{
+#dashboard h1 {
 	font-size: 32pt;
 	margin: 0px;
 }
 
-#dashboard h5{
+#dashboard h5 {
 	font-size: 8pt;
 	color: #f7941e;
 	font-weight: 300;
 	margin: 10px;
 }
-
-
 
 #dashboard .drives {
 	/*flex: 1;*/
@@ -215,7 +213,7 @@ input[placeholder]{
 	padding: 15px;
 }
 
-#dashboard .drives h3{
+#dashboard .drives h3 {
 	font-size: 10pt;
 	margin: 5px 15px;
 }
@@ -225,7 +223,7 @@ input[placeholder]{
 	text-align: center;
 }
 
-#dashboard .start-driving button{
+#dashboard .start-driving button {
 	background-color: #f7941e;
 	padding: 15px 60px;
 	border:none;
@@ -250,12 +248,12 @@ input[placeholder]{
 	text-align: center;
 }
 
-#driving .distance h3{
+#driving .distance h3 {
 	font-size: 10pt;
 	font-weight: 100;
 }
 
-#driving .distance h1{
+#driving .distance h1 {
 	font-size: 32pt;
 	margin: 0px;
 }
@@ -265,7 +263,7 @@ input[placeholder]{
 	text-align: center;
 }
 
-#driving .finish button{
+#driving .finish button {
 	border:8px;
 	border-style: solid;
 	border-color: #f7941e;
@@ -303,20 +301,20 @@ input[placeholder]{
 #rewards {
 	flex: 1;
 }
-#rewards h1{
+#rewards h1 {
 	color: #6d6d6d;
 	text-transform: uppercase;
 	font-size: 18pt;
 }
 
-#rewards p{
+#rewards p {
 	text-align: center;
 	color: #6b6b6b;
 	font-size: 10pt;
 	margin: auto 20px;
 }
 
-#rewards img{
+#rewards img {
 	width: 300px;
 	margin: 15px auto;
 }
@@ -328,7 +326,7 @@ input[placeholder]{
 	padding: 5px 20px;
 }
 
-.footer p{
+.footer p {
 	text-align: left !important;
 	color: #313131 !important;
 }
