@@ -38,7 +38,6 @@ hr {
 
 /* Top bar */
 #topbar {
-	flex: 0 0 10%;
 	background: #4f4b67;
 }
 
@@ -172,7 +171,6 @@ input[placeholder] {
 
 /* Dashboard */
 #dashboard {
-	flex: 1;
 	background: white;
 }
 

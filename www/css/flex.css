@@ -37,6 +37,22 @@
 	flex: 5;
 }
 
+.flex.six {
+	flex: 6;
+}
+
+.flex.seven {
+	flex: 7;
+}
+
+.flex.eight {
+	flex: 8;
+}
+
+.flex.nine {
+	flex: 9;
+}
+
 .flex.align-start {
 	-webkit-align-items: flex-start;
 	-ms-align-items: flex-start;

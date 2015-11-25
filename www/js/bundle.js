@@ -146,7 +146,7 @@
 		render: function () {
 			return React.createElement(
 				'div',
-				{ id: 'topbar', className: 'flex row align-center' },
+				{ id: 'topbar', className: 'flex one row align-center' },
 				React.createElement(App.Topbar.Hamburger, { showSidebar: this.props.showSidebar }),
 				React.createElement(App.Topbar.Logo, null)
 			);
@@ -308,7 +308,7 @@
 		render: function () {
 			return React.createElement(
 				'div',
-				{ id: 'dashboard', className: 'flex column align-center' },
+				{ id: 'dashboard', className: 'flex five column align-center' },
 				React.createElement(App.Dashboard.TotalMiles, null),
 				React.createElement('hr', null),
 				React.createElement(App.Dashboard.Drives, null),

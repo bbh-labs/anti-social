@@ -91,7 +91,7 @@ var App = React.createClass({
 App.Topbar = React.createClass({
 	render: function() {
 		return (
-			<div id='topbar' className='flex row align-center'>
+			<div id='topbar' className='flex one row align-center'>
 				<App.Topbar.Hamburger showSidebar={this.props.showSidebar} />
 				<App.Topbar.Logo />
 			</div>
@@ -197,7 +197,7 @@ App.Login = React.createClass({
 App.Dashboard = React.createClass({
 	render: function() {
 		return (
-			<div id='dashboard' className='flex column align-center' >
+			<div id='dashboard' className='flex five column align-center' >
 				<App.Dashboard.TotalMiles />
 				<hr/>
 				<App.Dashboard.Drives />
