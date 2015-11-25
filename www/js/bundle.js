@@ -90,7 +90,7 @@
 				case 'dashboard':
 					elem = React.createElement(App.Dashboard, null);break;
 				case 'driving':
-					elem = React.createElement(App.Driving, null);break;
+					elem = React.createElement(App.Driving, { showSidebar: this.showSidebar });break;
 				case 'rewards':
 					elem = React.createElement(App.Rewards, null);break;
 			}
@@ -447,7 +447,7 @@
 				'div',
 				{ id: 'driving', className: 'flex seven column' },
 				this.state.failed ? React.createElement(App.Driving.Failed, null) : null,
-				React.createElement(App.Driving.Map, { updateDistance: this.updateDistance }),
+				React.createElement(App.Driving.Map, { updateDistance: this.updateDistance, showSidebar: this.props.showSidebar }),
 				React.createElement(App.Driving.Distance, { distance: this.state.distance }),
 				React.createElement(App.Driving.Finish, { distance: this.state.distance })
 			);
@@ -506,6 +506,10 @@
 					}
 				});
 				this.map.addEventListener(plugin.google.maps.event.MAP_READY, this.onMapReady);
+
+				if (this.props.showSidebar) {
+					this.map.setClickable(false);
+				}
 			}
 
 			this.watchID = navigator.geolocation.watchPosition(this.onLocationReceived, this.onLocationError, {
@@ -513,6 +517,13 @@
 				timeout: 30000,
 				maximumAge: 10000
 			});
+		},
+		componentDidUpdate: function () {
+			if (this.props.showSidebar) {
+				this.map.setClickable(false);
+			} else {
+				this.map.setClickable(true);
+			}
 		},
 		componentWillUnmount: function () {
 			navigator.geolocation.clearWatch(this.watchID);

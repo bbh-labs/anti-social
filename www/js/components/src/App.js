@@ -40,7 +40,7 @@ var App = React.createClass({
 		case 'dashboard':
 			elem = <App.Dashboard />; break;
 		case 'driving':
-			elem = <App.Driving />; break;
+			elem = <App.Driving showSidebar={this.showSidebar} />; break;
 		case 'rewards':
 			elem = <App.Rewards />; break;
 		}
@@ -284,7 +284,7 @@ App.Driving = React.createClass({
 		return (
 			<div id='driving' className='flex seven column'>
 				{ this.state.failed ? <App.Driving.Failed /> : null }
-				<App.Driving.Map updateDistance={this.updateDistance} />
+				<App.Driving.Map updateDistance={this.updateDistance} showSidebar={this.props.showSidebar} />
 				<App.Driving.Distance distance={this.state.distance} />
 				<App.Driving.Finish distance={this.state.distance} />
 			</div>
@@ -342,6 +342,10 @@ App.Driving.Map = React.createClass({
 				},
 			});
 			this.map.addEventListener(plugin.google.maps.event.MAP_READY, this.onMapReady);
+
+			if (this.props.showSidebar) {
+				this.map.setClickable(false);
+			}
 		}
 
 		this.watchID = navigator.geolocation.watchPosition(this.onLocationReceived, this.onLocationError, {
@@ -349,6 +353,13 @@ App.Driving.Map = React.createClass({
 			timeout: 30000,
 			maximumAge: 10000,
 		});
+	},
+	componentDidUpdate: function() {
+		if (this.props.showSidebar) {
+			this.map.setClickable(false);
+		} else {
+			this.map.setClickable(true);
+		}
 	},
 	componentWillUnmount: function() {
 		navigator.geolocation.clearWatch(this.watchID);
