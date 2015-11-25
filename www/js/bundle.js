@@ -159,7 +159,7 @@
 		render: function () {
 			return React.createElement(
 				'div',
-				{ className: 'hamburger' },
+				{ className: 'hamburger flex one align-start' },
 				React.createElement('img', { className: 'image', src: 'images/hamburger.png', onClick: this.props.showSidebar })
 			);
 		}
@@ -171,7 +171,7 @@
 		render: function () {
 			return React.createElement(
 				'div',
-				{ className: 'logo' },
+				{ className: 'logo flex one align-end justify-end' },
 				React.createElement('img', { className: 'image', src: 'images/ntuc_logo_white.png' })
 			);
 		}
@@ -263,7 +263,7 @@
 		render: function () {
 			return React.createElement(
 				'div',
-				{ id: 'login', className: 'flex align-center justify-center' },
+				{ id: 'login', className: 'flex one align-center justify-center' },
 				React.createElement(
 					'div',
 					{ className: 'flex inner column ' },
@@ -308,7 +308,7 @@
 		render: function () {
 			return React.createElement(
 				'div',
-				{ id: 'dashboard', className: 'flex five column align-center' },
+				{ id: 'dashboard', className: 'flex seven column align-center' },
 				React.createElement(App.Dashboard.TotalMiles, null),
 				React.createElement('hr', null),
 				React.createElement(App.Dashboard.Drives, null),
@@ -356,7 +356,7 @@
 		render: function () {
 			return React.createElement(
 				'div',
-				{ className: 'drives flex column justify-center' },
+				{ className: 'drives flex one column justify-center' },
 				React.createElement(
 					'div',
 					null,
@@ -420,7 +420,7 @@
 		render: function () {
 			return React.createElement(
 				'div',
-				{ className: 'start-driving flex column justify-center' },
+				{ className: 'start-driving flex one column justify-center' },
 				React.createElement(
 					'button',
 					{ onClick: this.startDriving },
@@ -439,7 +439,7 @@
 		render: function () {
 			return React.createElement(
 				'div',
-				{ id: 'driving', className: 'flex column' },
+				{ id: 'driving', className: 'flex seven column' },
 				this.state.failed ? React.createElement(App.Driving.Failed, null) : null,
 				React.createElement(App.Driving.Map, { updateDistance: this.updateDistance }),
 				React.createElement(App.Driving.Distance, { distance: this.state.distance }),
@@ -450,13 +450,13 @@
 			return { distance: 0, failed: false };
 		},
 		componentDidMount: function () {
-			this.listenerID = dispatcher.register(function (payload) {
+			this.listenerID = dispatcher.register((function (payload) {
 				switch (payload.type) {
 					case 'resume':
 						this.failed();
 						break;
 				}
-			});
+			}).bind(this));
 		},
 		componentWillUnmount: function () {
 			dispatcher.unregister(this.listenerID);
@@ -473,6 +473,7 @@
 			var failedCount = parseInt(localStorage.getItem('failedCount'));
 			failedCount = !isNaN(failedCount) ? failedCount + 1 : 1;
 			localStorage.setItem('failedCount', failedCount);
+
 			this.setState({ failed: true });
 		}
 	});
@@ -481,7 +482,7 @@
 		displayName: 'Map',
 
 		render: function () {
-			return React.createElement('div', { id: 'map', className: 'map' });
+			return React.createElement('div', { id: 'map', className: 'map flex three' });
 		},
 		componentDidMount: function () {
 			if (typeof plugin != 'undefined' && typeof this.map == 'undefined') {
@@ -546,7 +547,7 @@
 		render: function () {
 			return React.createElement(
 				'div',
-				{ className: 'distance flex column align-center justify-center' },
+				{ className: 'distance flex one column align-center justify-center' },
 				React.createElement(
 					'h3',
 					null,
@@ -570,7 +571,7 @@
 		render: function () {
 			return React.createElement(
 				'div',
-				{ className: 'finish flex column align-center justify-center' },
+				{ className: 'finish flex one column align-center justify-center' },
 				React.createElement(
 					'button',
 					{ onClick: this.finishDriving },
@@ -596,7 +597,7 @@
 		render: function () {
 			return React.createElement(
 				'div',
-				{ className: 'failed flex column align-center justify-center' },
+				{ className: 'failed flex one column align-center justify-center' },
 				React.createElement(
 					'div',
 					{ className: 'inner' },
@@ -624,7 +625,7 @@
 		render: function () {
 			return React.createElement(
 				'div',
-				{ id: 'rewards', className: 'flex column' },
+				{ id: 'rewards', className: 'flex seven column' },
 				React.createElement(
 					'div',
 					{ className: 'inner flex column inner align-center' },

@@ -42,23 +42,20 @@ hr {
 }
 
 #topbar .hamburger {
-	flex: 1;
 	margin: 16px;
 }
 
 #topbar .hamburger .image {
 	cursor: pointer;
-	width: 35px;
+	width: 36px;
 }
 
 #topbar .logo {
-	flex: 1;
-	margin: 10px;
-	text-align: right;
+	margin: 16px;
 }
 
 #topbar .logo img {
-	width: 90px;
+	height: 36px;
 }
 
 /* Side bar */
@@ -97,7 +94,6 @@ hr {
 
 /* Login */
 #login {
-	flex: 1;
 	background: url(../images/login_bg.jpg) center / cover;
 }
 
@@ -175,9 +171,7 @@ input[placeholder] {
 }
 
 #dashboard .total-miles {
-	/*flex: 1;*/
 	text-align: center;
-
 }
 
 #dashboard .total-miles img {
@@ -204,7 +198,6 @@ input[placeholder] {
 }
 
 #dashboard .drives {
-	/*flex: 1;*/
 	text-align: center;
 	display: -webkit-box;
 	height: 40px;
@@ -217,7 +210,6 @@ input[placeholder] {
 }
 
 #dashboard .start-driving {
-	flex: 1;
 	text-align: center;
 }
 
@@ -231,18 +223,15 @@ input[placeholder] {
 
 /* Driving */
 #driving {
-	flex: 1;
 	position: relative;
 	background: white;
 }
 
 #driving .map {
-	flex: 3;
 	background: gray;
 }
 
 #driving .distance {
-	flex: 1;
 	text-align: center;
 }
 
@@ -257,7 +246,6 @@ input[placeholder] {
 }
 
 #driving .finish {
-	flex: 1;
 	text-align: center;
 }
 
@@ -297,8 +285,9 @@ input[placeholder] {
 
 /* Rewards */
 #rewards {
-	flex: 1;
+
 }
+
 #rewards h1 {
 	color: #6d6d6d;
 	text-transform: uppercase;

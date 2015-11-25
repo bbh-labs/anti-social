@@ -102,7 +102,7 @@ App.Topbar = React.createClass({
 App.Topbar.Hamburger = React.createClass({
 	render: function() {
 		return (
-			<div className='hamburger'>
+			<div className='hamburger flex one align-start'>
 				<img className='image' src='images/hamburger.png' onClick={this.props.showSidebar} />
 			</div>
 		)
@@ -112,7 +112,7 @@ App.Topbar.Hamburger = React.createClass({
 App.Topbar.Logo = React.createClass({
 	render: function() {
 		return (
-			<div className='logo'>
+			<div className='logo flex one align-end justify-end'>
 				<img className='image' src='images/ntuc_logo_white.png' />
 			</div>
 		)
@@ -174,7 +174,7 @@ App.Sidebar.Item = React.createClass({
 App.Login = React.createClass({
 	render: function() {
 		return (
-			<div id='login' className='flex align-center justify-center' >
+			<div id='login' className='flex one align-center justify-center' >
 				<div className='flex inner column '>
 					<h1>ANTI-SOCIAL DRIVE</h1>
 					<h3>Don&#39;t use your phone while driving and earn rewards.</h3>
@@ -197,7 +197,7 @@ App.Login = React.createClass({
 App.Dashboard = React.createClass({
 	render: function() {
 		return (
-			<div id='dashboard' className='flex five column align-center' >
+			<div id='dashboard' className='flex seven column align-center' >
 				<App.Dashboard.TotalMiles />
 				<hr/>
 				<App.Dashboard.Drives />
@@ -230,7 +230,7 @@ App.Dashboard.TotalMiles = React.createClass({
 App.Dashboard.Drives = React.createClass({
 	render: function() {
 		return (
-			<div className='drives flex column justify-center'>
+			<div className='drives flex one column justify-center'>
 				<div>
 					<h3>DRIVES</h3>
 					<h3>{this.driveCount()}</h3>
@@ -263,7 +263,7 @@ App.Dashboard.Drives = React.createClass({
 App.Dashboard.StartDriving = React.createClass({
 	render: function() {
 		return (
-			<div className='start-driving flex column justify-center'>
+			<div className='start-driving flex one column justify-center'>
 				<button onClick={this.startDriving}>START DRIVING</button>
 			</div>
 		)
@@ -276,7 +276,7 @@ App.Dashboard.StartDriving = React.createClass({
 App.Driving = React.createClass({
 	render: function() {
 		return (
-			<div id='driving' className='flex column'>
+			<div id='driving' className='flex seven column'>
 				{ this.state.failed ? <App.Driving.Failed /> : null }
 				<App.Driving.Map updateDistance={this.updateDistance} />
 				<App.Driving.Distance distance={this.state.distance} />
@@ -294,7 +294,7 @@ App.Driving = React.createClass({
 				this.failed();
 				break;
 			}
-		});
+		}.bind(this));
 	},
 	componentWillUnmount: function() {
 		dispatcher.unregister(this.listenerID);
@@ -311,13 +311,14 @@ App.Driving = React.createClass({
 		var failedCount = parseInt(localStorage.getItem('failedCount'));
 		failedCount = !isNaN(failedCount) ? failedCount + 1 : 1;
 		localStorage.setItem('failedCount', failedCount);
+
 		this.setState({ failed: true });
 	},
 });
 
 App.Driving.Map = React.createClass({
 	render: function() {
-		return <div id='map' className='map'></div>
+		return <div id='map' className='map flex three'></div>
 	},
 	componentDidMount: function() {
 		if (typeof(plugin) != 'undefined' && typeof(this.map) == 'undefined') {
@@ -379,7 +380,7 @@ App.Driving.Map = React.createClass({
 App.Driving.Distance = React.createClass({
 	render: function() {
 		return (
-			<div className='distance flex column align-center justify-center'>
+			<div className='distance flex one column align-center justify-center'>
 				<h3>MILES</h3>
 				<h1>{this.totalDistance()}</h1>
 			</div>
@@ -393,7 +394,7 @@ App.Driving.Distance = React.createClass({
 App.Driving.Finish = React.createClass({
 	render: function() {
 		return (
-			<div className='finish flex column align-center justify-center'>
+			<div className='finish flex one column align-center justify-center'>
 				<button onClick={this.finishDriving}>FINISH</button>
 			</div>
 		)
@@ -413,7 +414,7 @@ App.Driving.Finish = React.createClass({
 App.Driving.Failed = React.createClass({
 	render: function() {
 		return (
-			<div className='failed flex column align-center justify-center'>
+			<div className='failed flex one column align-center justify-center'>
 				<div className='inner'>
 					<p className='message'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dictum leo vel sollicitudin pretium. Quisque mattis viverra mi, quis ullamcorper lacus congue a.</p>
 					<button className='button' onClick={this.startAgain}>START AGAIN</button>
@@ -429,7 +430,7 @@ App.Driving.Failed = React.createClass({
 App.Rewards = React.createClass({
 	render: function() {
 		return (
-			<div id='rewards' className='flex column'>
+			<div id='rewards' className='flex seven column'>
 				<div className='inner flex column inner align-center'>
 					<h1>Rewards</h1>
 					<p>Use your accumulated miles to exchange different NTUC Income rewards</p>
