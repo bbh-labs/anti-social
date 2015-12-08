@@ -443,7 +443,7 @@ App.Driving.Failed = React.createClass({
 		return (
 			<div className='failed flex one column align-center justify-center'>
 				<div className='inner'>
-					<p className='message'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dictum leo vel sollicitudin pretium. Quisque mattis viverra mi, quis ullamcorper lacus congue a.</p>
+					<p className='message'>It seems like you were distracted by your phone during your drive! You'll have to restart the drive challenge again to get the points.</p>
 					<button className='button' onClick={this.startAgain}>START AGAIN</button>
 				</div>
 			</div>
