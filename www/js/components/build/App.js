@@ -298,7 +298,7 @@ App.Dashboard.TotalMiles = React.createClass({
 			),
 			React.createElement(
 				'h5',
-				null,
+				{ onClick: this.gotoRewards },
 				'GET YOUR REWARDS NOW'
 			)
 		);
@@ -307,6 +307,9 @@ App.Dashboard.TotalMiles = React.createClass({
 		var meters = parseInt(localStorage.getItem('traveledDistance'));
 		var miles = !isNaN(meters) ? meters * 0.000621371 : 0;
 		return miles;
+	},
+	gotoRewards: function () {
+		dispatcher.dispatch({ type: 'goto', page: 'rewards' });
 	}
 });
 
@@ -524,7 +527,7 @@ App.Driving.Map = React.createClass({
 		}
 	},
 	onLocationError: function (error) {
-		alert(error.message);
+		alert('Couldn\'t find GPS signal! Try going outside.');
 		dispatcher.dispatch({ type: 'goto', page: 'dashboard' });
 	}
 });
