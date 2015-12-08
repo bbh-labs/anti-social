@@ -383,7 +383,7 @@
 					React.createElement(
 						'h3',
 						null,
-						'SUCCESSED'
+						'SUCCEEDED'
 					),
 					React.createElement(
 						'h3',
@@ -456,6 +456,8 @@
 			return { distance: 0, failed: false };
 		},
 		componentDidMount: function () {
+			plugins.insomnia.keepAwake();
+
 			this.listenerID = dispatcher.register((function (payload) {
 				switch (payload.type) {
 					case 'resume':
@@ -465,11 +467,14 @@
 			}).bind(this));
 		},
 		componentWillUnmount: function () {
+			plugins.insomnia.allowSleepAgain();
+
 			dispatcher.unregister(this.listenerID);
 		},
 		updateDistance: function (a, b) {
-			var d = haversine(a.lat, b.lat, a.lng, b.lng);
-			this.setState({ distance: d });
+			var distance = haversine(a.lat, b.lat, a.lng, b.lng);
+			var prevDistance = this.state.distance;
+			this.setState({ distance: prevDistance + distance });
 		},
 		failed: function () {
 			var traveledDistance = parseInt(localStorage.getItem('traveledDistance'));
@@ -549,11 +554,13 @@
 			var coords = position.coords;
 			var latlng = new plugin.google.maps.LatLng(coords.latitude, coords.longitude);
 			if (this.marker) {
+				this.map.setCenter(latlng);
 				this.marker.setPosition(latlng);
 				this.props.updateDistance(this.origLatLng, {
 					lat: coords.latitude,
 					lng: coords.longitude
 				});
+				this.origLatLng = { lat: coords.latitude, lng: coords.longitude };
 			} else {
 				this.origLatLng = { lat: coords.latitude, lng: coords.longitude };
 				this.map.setCenter(latlng);
