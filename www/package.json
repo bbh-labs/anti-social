@@ -9,6 +9,7 @@
   "author": "Jacky Boen",
   "license": "GPL-2.0",
   "dependencies": {
+    "babel-preset-react": "^6.3.13",
     "classnames": "^2.2.0",
     "flux": "^2.1.1",
     "react": "^0.14.3",
